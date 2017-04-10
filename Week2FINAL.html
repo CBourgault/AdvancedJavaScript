@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39">
+
+  <title>Chace Bourgualt Assignment 2</title>
+  <meta charset="UTF-8">
+  <style>  
+		    table {			
+					border:1px solid black;
+			} 		  
+		    td{
+					border:1px solid black;
+			}
+			.red1{
+					background-color:red;
+			}
+			.blue1{
+					background-color:blue;
+			}
+  </style>
+</head>
+
+<body>
+  <form>
+    <input type="button" id="mybutton" value="Generate Grid"> <input type="text" id="myText" value="5">
+  </form>
+
+  <div id="wrapper" class="red"></div>
+
+  <div id="result"></div><script>
+  // Creates a variable linked to a form element
+  var myButton = document.getElementById("mybutton");
+  // Creates a variable linked to a form element
+  var myText = document.getElementById("myText");
+  //Sets an element event to execute a function
+  myButton.onclick = doStuff; 
+	//Function for returning a randomly generated number
+  function randomNumber (min, max) {
+      return Math.floor (Math.random() * (max - min + 1)) + min;
+  }
+	//Main function that creates a table thats dimensions are decided by the user
+  function doStuff()
+  {
+	//Stores variable gridTotal
+        var gridTotal = 0;
+	//Parses a user input to get the int value
+        parseInt(myText.value);
+		//Calls on element by class name
+        var wrapper = document.getElementsByClassName("red")[0];
+
+	//Creates a table and stores values within table as an array
+  var str ="<table>";
+  var table = []
+  //Nested for loop that generates a table
+  for(var r = 0; r < myText.value; r++)
+  {
+      str += "<tr>" 
+      table.push([])
+      for(var c = 0; c < myText.value; c++)
+      {
+        table[r][c] = randomNumber(1, 100);
+        str += "<td";
+        
+                var tempTable = table[r][c];
+                gridTotal += table[r][c];
+                //if statement to check if a randomly generated number is divisble by 3 or 2
+                if(tempTable %3 === 0)
+                {
+                str += ' class= "red1";>';
+				console.log("Divisible by 3");
+                }
+                
+                else if(tempTable %2 === 0)
+                {
+                str += ' class ="blue1";>';
+                console.log("Divisible by 2");
+                }
+                //Else statement in case the number is not divisible by 3 or 2 in integer form
+                else{
+                str += ">";
+                }
+                //Closing statement within for loop
+        str += table[r][c] + "<\/td>";
+      }
+      str += "<\/tr>";
+  }
+  str += "<\/table>";
+
+  wrapper.innerHTML = str;
+
+  console.log(table);
+	//Math calculations to get the number of cells and the average of numbers within the cells 
+  var average = myText.value * myText.value;
+  var completeAverage = gridTotal / average;
+  //Logs the values in the browsers console
+  console.log(average);
+  console.log(gridTotal);
+  console.log(completeAverage);
+  //Displays output onto div with the results of the math calculations
+  var output = "The average is" + " " + completeAverage;
+  result.innerHTML = output;
+  //Displays javascript in div container
+  }
+
+  </script>
+</body>
+</html>
